@@ -3,7 +3,7 @@
 Today ToDo is a minimal, distraction-free daily task manager **extension for Visual Studio Code**.
 Focus on what matters today, carry over unfinished tasks, and keep your workflow simple.
 
-![sample](./media/demonstration/sample.gif)
+<img src="./media/demonstration/sample.gif" width="300px" />
 
 
 ## Concept
@@ -29,17 +29,16 @@ This simple workflow helps you stay focused and productive, one day at a time.
 ## Demonstration
 ### Pages
 1. **Briefing**  
-![briefing](./media/demonstration/briefing.png)
+<img src="./media/demonstration/briefing.png" width="300px" />
 1. **Focusing**  
-![focusing](./media/demonstration/focusing.png)
+<img src="./media/demonstration/focusing.png" width="300px" />
 1. **Check today done**  
-![done-today](./media/demonstration/done-today.png)
-
+<img src="./media/demonstration/done-today.png" width="300px" />
 1. **Check all done**  
-![done-all](./media/demonstration/done-all.png)
+<img src="./media/demonstration/done-all.png" width="300px" />
 
 ### Sample
-![sample](./media/demonstration/sample.gif)
+<img src="./media/demonstration/sample.gif" width="300px" />
 
 ## Getting Started
 1. Install the extension from the VS Code Marketplace or your VS Code directory.
