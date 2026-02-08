@@ -26,14 +26,14 @@ This simple workflow helps you stay focused and productive, one day at a time.
 
 ## Demonstration
 ### Pages
-1. **Briefing**
+1. **Briefing**  
 ![briefing](./media/demonstration/briefing.png)
-1. **Focusing**
+1. **Focusing**  
 ![focusing](./media/demonstration/focusing.png)
-1. **Check today done**
+1. **Check today done**  
 ![done-today](./media/demonstration/done-today.png)
 
-1. **Check all done**
+1. **Check all done**  
 ![done-all](./media/demonstration/done-all.png)
 
 ### Sample

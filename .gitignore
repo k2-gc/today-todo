@@ -7,3 +7,5 @@ node_modules
 *mov
 build/
 .DS_Store
+*test.mjs
+*test.ts
