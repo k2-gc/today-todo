@@ -52,7 +52,9 @@ This simple workflow helps you stay focused and productive, one day at a time.
 By default, VS Code may hide the Today-ToDo icon from the Activity Bar when you switch to another view.
 If you want the icon to always stay visible:
 1. Right-click the **Today-ToDo** icon in the Activity Bar.
-2. Click **“Keep in Sidebar”** (or **“Pin”**).
+1. In the menu that appears, select **Today-ToDo** so that a checkmark appears next to it.
+
+This will pin the Today-ToDo icon in the Activity Bar.
 
 ## Known Issues
 None at the moment. Please report issues on [GitHub](https://github.com/k2-gc/today-todo/issues).
