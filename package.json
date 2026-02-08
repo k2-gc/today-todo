@@ -1,0 +1,73 @@
+{
+  "name": "today-todo",
+  "displayName": "Today-ToDo",
+  "description": "Focus on today, Make progress.",
+  "version": "0.0.1",
+  "publisher": "k2-gc",
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.85.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "license": "MIT",
+  "main": "./out/src/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/k2-gc/today-todo"
+  },
+  "bugs": {
+    "url": "https://github.com/k2-gc/today-todo/issues"
+  },
+  "homepage": "https://github.com/k2-gc/today-todo",
+  "keywords": ["todo", "productivity", "task", "today"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "today-todo.open",
+        "title": "Today-ToDo: Open"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "today-todo",
+          "title": "Today-ToDo",
+          "icon": "media/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "today-todo": [
+        {
+          "type": "webview",
+          "id": "today-todo.mainView",
+          "name": "Today-ToDo",
+          "icon": "media/icon.png"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile && npm run build:webview",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build:webview": "cd webview-ui && npm run build",
+    "watch:webview": "cd webview-ui && npm run dev",
+    "watch:all": "concurrently \"npm run watch\" \"npm run watch:webview\"",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.48.1",
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "concurrently": "^8.2.2"
+  }
+}

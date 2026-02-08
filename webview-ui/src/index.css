@@ -1,0 +1,256 @@
+:root {
+  font-family: var(--vscode-font-family);
+  color: var(--vscode-foreground);
+  background-color: var(--vscode-editor-background);
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+}
+
+#root {
+  max-width: 100%;
+}
+
+button {
+  background-color: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+button:hover {
+  background-color: var(--vscode-button-hoverBackground);
+}
+
+input {
+  background-color: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  border: 1px solid var(--vscode-input-border);
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--vscode-panel-border);
+  padding-bottom: 8px;
+}
+
+.top-nav button {
+  padding: 4px 10px;
+  font-size: 0.95em;
+  opacity: 0.7;
+  min-width: 0;
+  border-radius: 2px;
+}
+
+.top-nav button.active {
+  opacity: 1;
+  border-bottom: 2px solid var(--vscode-button-background);
+}
+
+.top-nav button:hover {
+  opacity: 1;
+}
+
+.top-nav button .nav-label {
+  display: inline;
+}
+
+@media (max-width: 250px) {
+  .top-nav button .nav-label {
+    display: none;
+  }
+}
+
+.task-item {
+  display: flex;
+  /* align-items: center; */
+  gap: 8px;
+  padding: 12px;
+  margin: 4px 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.task-item .task-checkbox {
+  width: 16px;
+  height: 16px;
+}
+.task-item .task-title {
+  flex: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-item.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+.completion-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.completion-message p {
+  font-size: 1.2em;
+  margin: 8px 0;
+}
+
+.completion-message .subtitle {
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+.yesterday-section {
+  margin-bottom: 20px;
+  padding: 12px;
+  background-color: var(--vscode-inputValidation-warningBackground);
+  border-left: 3px solid var(--vscode-inputValidation-warningBorder);
+  border-radius: 4px;
+}
+
+.yesterday-toggle {
+  width: 100%;
+  text-align: left;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: var(--vscode-foreground);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.yesterday-toggle:hover {
+  background-color: var(--vscode-list-hoverBackground);
+}
+
+.yesterday-tasks {
+  margin-top: 12px;
+  padding-left: 8px;
+}
+
+.yesterday-task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  margin: 4px 0;
+  background-color: var(--vscode-editor-background);
+  border-radius: 2px;
+}
+
+.yesterday-task-item .task-title {
+  flex: 1;
+  opacity: 0.8;
+}
+
+.carry-over-btn {
+  padding: 4px 12px;
+  font-size: 0.85em;
+  background-color: var(--vscode-button-secondaryBackground);
+  color: var(--vscode-button-secondaryForeground);
+}
+
+.carry-over-btn:hover {
+  background-color: var(--vscode-button-secondaryHoverBackground);
+}
+
+.task-list-header {
+  margin: 16px 0 8px 0;
+  font-size: 1.0em;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.briefing-view {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.add-task-section {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.add-task-section input[type="text"] {
+  flex: 1;
+}
+
+.task-list {
+  margin-bottom: 24px;
+}
+
+.task-item {
+  background: var(--vscode-editorWidget-background);
+  border-radius: 4px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.next-button {
+  display: block;
+  margin: 32px auto 0 auto;
+  min-width: 180px;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 12px 0;
+}
+
+.task-list-divider {
+  height: 1px;
+  background-color: var(--vscode-panel-border);
+  margin: 12px 0 12px 0;
+}
+
+.empty-message {
+  font-size: 0.92em;
+  opacity: 0.7;
+  margin: 12px 0 0 0;
+}
+
+.task-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 90px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: var(--vscode-editorWidget-background);
+  border-radius: 4px;
+}
+
+.task-check {
+  text-align: center;
+  font-size: 1.2em;
+  color: var(--vscode-editorInfo-foreground, #4caf50);
+}
+
+.task-title {
+  font-size: 1em;
+  word-break: break-all;
+}
+
+.task-time {
+  text-align: right;
+  font-size: 0.92em;
+  opacity: 0.7;
+}
