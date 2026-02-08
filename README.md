@@ -41,7 +41,7 @@ This simple workflow helps you stay focused and productive, one day at a time.
 <img src="./media/demonstration/sample.gif" width="300px" />
 
 ## Getting Started
-1. Install the extension from the VS Code Marketplace or your VS Code directory.
+1. Install the extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=k2-gc.today-todo) or your VS Code directory.
 2. Open the command palette and type `Today-ToDo: Open`.
 3. Open the **Today ToDo** view from the Activity Bar.
 4. Add your tasks for today and start focusing!
