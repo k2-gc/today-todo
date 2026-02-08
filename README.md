@@ -42,10 +42,18 @@ This simple workflow helps you stay focused and productive, one day at a time.
 ![sample](./media/demonstration/sample.gif)
 
 ## Getting Started
-Install the extension from the VS Code Marketplace or your VS Code directory.
-Open command pallete and type "Today-ToDo: Open".
-Open the "Today ToDo" view from the Activity Bar.
-Add your tasks for today and start focusing!
+1. Install the extension from the VS Code Marketplace or your VS Code directory.
+2. Open the command palette and type `Today-ToDo: Open`.
+3. Open the **Today ToDo** view from the Activity Bar.
+4. Add your tasks for today and start focusing!
+
+
+### Keep the icon in the Activity Bar
+
+By default, VS Code may hide the Today-ToDo icon from the Activity Bar when you switch to another view.
+If you want the icon to always stay visible:
+1. Right-click the **Today-ToDo** icon in the Activity Bar.
+2. Click **“Keep in Sidebar”** (or **“Pin”**).
 
 ## Known Issues
 None at the moment. Please report issues on [GitHub](https://github.com/k2-gc/today-todo/issues).
