@@ -3,6 +3,8 @@
 Today ToDo is a minimal, distraction-free daily task manager for VS Code.
 Focus on what matters today, carry over unfinished tasks, and keep your workflow simple.
 
+![sample](./media/demonstration/sample.gif)
+
 
 ## Concept
 
