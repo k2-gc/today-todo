@@ -6,25 +6,25 @@ interface BriefingViewProps {
   tasks: Task[];
   onAddTask: (title: string) => void;
   onSetFocusedTasks: (taskIds: string[]) => void;
-  onGetYesterdayIncompleteTasks: () => void;
+  onGetLatestIncompleteTasks: () => void;
   onCarryOverTask: (task: Task) => void;
-  yesterdayTasks: Task[];
+  latestIncompleteTasks: Task[];
 }
 
 export default function BriefingView({
   tasks,
   onAddTask,
   onSetFocusedTasks,
-  onGetYesterdayIncompleteTasks,
+  onGetLatestIncompleteTasks,
   onCarryOverTask,
-  yesterdayTasks,
+  latestIncompleteTasks,
 }: BriefingViewProps) {
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [selectedTaskIds, setSelectedTaskIds] = useState<string[]>([]);
-  const [showYesterday, setShowYesterday] = useState(false);
+  const [showLatestIncomplete, setShowLatestIncomplete] = useState(false);
 
   useEffect(() => {
-    onGetYesterdayIncompleteTasks();
+    onGetLatestIncompleteTasks();
   }, []);
 
   useEffect(() => {
@@ -63,16 +63,20 @@ export default function BriefingView({
     <div className="briefing-view">
       <h2>📋 Today's Briefing</h2>
 
-      {yesterdayTasks.length > 0 && (
-        <div className="yesterday-section">
-          <button className="yesterday-toggle" onClick={() => setShowYesterday(!showYesterday)}>
-            ⚠️ {yesterdayTasks.length} task{yesterdayTasks.length > 1 ? 's' : ''} from yesterday
+      {latestIncompleteTasks.length > 0 && (
+        <div className="latest-incomplete-section">
+          <button
+            className="latest-incomplete-toggle"
+            onClick={() => setShowLatestIncomplete(!showLatestIncomplete)}
+          >
+            ⚠️ {latestIncompleteTasks.length} task{latestIncompleteTasks.length > 1 ? 's' : ''} from
+            the past day
           </button>
 
-          {showYesterday && (
-            <div className="yesterday-tasks">
-              {yesterdayTasks.map((task) => (
-                <div key={task.id} className="yesterday-task-item">
+          {showLatestIncomplete && (
+            <div className="latest-incomplete-tasks">
+              {latestIncompleteTasks.map((task) => (
+                <div key={task.id} className="latest-incomplete-task-item">
                   <span className="task-title">{task.title}</span>
                   <button className="carry-over-button" onClick={() => handleCarryOver(task)}>
                     Carry Over

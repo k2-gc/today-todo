@@ -85,11 +85,11 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
           case 'switchView':
             await this._handleSwitchView(message.view);
             break;
-          case 'getYesterdayIncompleteTasks':
-            await this._handleGetYesterdayIncompleteTasks();
+          case 'getLatestIncompleteTasks':
+            await this._handleGetLatestIncompleteTasks();
             break;
           case 'carryOverTask':
-            await this._handleCarryOverTask(message.yesterdayTask);
+            await this._handleCarryOverTask(message.pastTask);
             break;
           case 'update':
             await this._handleUpdate();
@@ -108,13 +108,13 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   /**
-   * Handle getYesterdayIncompleteTasks command.
+   * Handle getLatestIncompleteTasks command.
    */
-  private async _handleGetYesterdayIncompleteTasks() {
-    const tasks = await this._appController.getYesterdayIncompleteTasks();
+  private async _handleGetLatestIncompleteTasks() {
+    const tasks = await this._appController.getLatestIncompleteTasks();
 
     this._postMessage({
-      type: 'yesterdayIncompleteTasks',
+      type: 'latestIncompleteTasks',
       payload: {
         tasks,
       },
@@ -124,8 +124,8 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
   /**
    * Handle carryOverTask command.
    */
-  private async _handleCarryOverTask(yesterdayTask: Task) {
-    const newTask = await this._appController.carryOverTask(yesterdayTask);
+  private async _handleCarryOverTask(pastTask: Task) {
+    const newTask = await this._appController.carryOverTask(pastTask);
     const session = await this._appController.getCurrentSession();
 
     this._postMessage({
@@ -133,7 +133,7 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
       payload: {
         task: newTask,
         session,
-        originalTaskId: yesterdayTask.id,
+        originalTaskId: pastTask.id,
       },
     });
   }
