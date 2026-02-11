@@ -7,5 +7,5 @@ export type WebviewMessage =
   | { command: 'toggleDone'; taskId: string }
   | { command: 'switchView'; view: ViewType }
   | { command: 'getLatestIncompleteTasks' }
-  | { command: 'carryOverTask'; pastTask: Task }
+  | { command: 'carryOverTask'; latestIncompleteTask: Task }
   | { command: 'update' };

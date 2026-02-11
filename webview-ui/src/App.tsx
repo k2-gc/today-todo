@@ -122,7 +122,7 @@ export default function App() {
   };
 
   const handleCarryOverTask = (task: Task) => {
-    sendMessage({ command: 'carryOverTask', pastTask: task });
+    sendMessage({ command: 'carryOverTask', latestIncompleteTask: task });
   };
 
   // Get Task of Today List

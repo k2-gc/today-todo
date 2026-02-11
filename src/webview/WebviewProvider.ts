@@ -89,7 +89,7 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
             await this._handleGetLatestIncompleteTasks();
             break;
           case 'carryOverTask':
-            await this._handleCarryOverTask(message.pastTask);
+            await this._handleCarryOverTask(message.latestIncompleteTask);
             break;
           case 'update':
             await this._handleUpdate();
@@ -124,8 +124,8 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
   /**
    * Handle carryOverTask command.
    */
-  private async _handleCarryOverTask(pastTask: Task) {
-    const newTask = await this._appController.carryOverTask(pastTask);
+  private async _handleCarryOverTask(latestIncompleteTask: Task) {
+    const newTask = await this._appController.carryOverTask(latestIncompleteTask);
     const session = await this._appController.getCurrentSession();
 
     this._postMessage({
@@ -133,7 +133,7 @@ export class WebviewProvider implements vscode.WebviewViewProvider {
       payload: {
         task: newTask,
         session,
-        originalTaskId: pastTask.id,
+        originalTaskId: latestIncompleteTask.id,
       },
     });
   }
