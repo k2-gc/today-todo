@@ -21,7 +21,7 @@ This simple workflow helps you stay focused and productive, one day at a time.
 
 ## Features
 - 📋 Briefing: Add today's tasks and select up to 3 to focus on
-- ⚠️ Yesterday's incomplete tasks: Carry over unfinished tasks with one click
+- ⚠️ Past incomplete tasks: Carry over unfinished tasks from any past session with one click
 - 🎯 Focus Mode: Check off tasks as you complete them
 - ✅ Done Today / Done All: Review your completed tasks by day or all-time
 - 🌓 Theme-aware: Seamlessly matches your VS Code theme
