@@ -179,16 +179,70 @@ export class VSCodeStorageAdapter implements StorageAdapter {
     }
   }
 
-  async getYesterdayIncompleteTasks(): Promise<Task[]> {
+  async updateArchivedTasks(task: Task, logicalDate?: string): Promise<void> {
     try {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayLogicalDate = computeLogicalDate(yesterday);
+      await fs.access(this.archiveDir.fsPath);
+    } catch (error) {
+      throw new Error('Archive directory does not exist');
+    }
 
-      const archiveFile = vscode.Uri.joinPath(this.archiveDir, `${yesterdayLogicalDate}.json`);
-      if (!(await fs.stat(archiveFile.fsPath).catch(() => false))) {
-        return [];
+    let targetDate = logicalDate;
+    // If no logicalDate specified, find the archive containing this task
+    if (!targetDate) {
+      const files = await fs.readdir(this.archiveDir.fsPath);
+      const archiveFiles = files
+        .filter((file: string) => file.endsWith('.json'))
+        .sort()
+        .reverse();
+
+      for (const file of archiveFiles) {
+        const archiveFile = vscode.Uri.joinPath(this.archiveDir, file);
+        const data = await fs.readFile(archiveFile.fsPath, 'utf-8');
+        const parsed: StorageData = JSON.parse(data);
+
+        if (parsed.tasks.some((t) => t.id === task.id)) {
+          targetDate = path.basename(file, '.json');
+          break;
+        }
       }
+      if (!targetDate) {
+        throw new Error(`Task ${task.id} not found in any archive`);
+      }
+    }
+
+    const archiveFile = vscode.Uri.joinPath(this.archiveDir, `${targetDate}.json`);
+    const data = await fs.readFile(archiveFile.fsPath, 'utf-8');
+    const parsed: StorageData = JSON.parse(data);
+
+    const index = parsed.tasks.findIndex((t) => t.id === task.id);
+    if (index !== -1) {
+      parsed.tasks[index] = task;
+      await fs.writeFile(archiveFile.fsPath, JSON.stringify(parsed, null, 2), 'utf-8');
+    } else {
+      throw new Error(`Task ${task.id} not found in archive ${targetDate}`);
+    }
+  }
+
+  async getLatestIncompleteTasks(): Promise<Task[]> {
+    try {
+      await fs.access(this.archiveDir.fsPath);
+    } catch (error) {
+      return [];
+    }
+
+    const files = await fs.readdir(this.archiveDir.fsPath);
+    const archiveFiles = files
+      .filter((file: string) => file.endsWith('.json'))
+      .sort()
+      .reverse();
+
+    if (archiveFiles.length === 0) {
+      return [];
+    }
+
+    // Search for the most recent archive with incomplete tasks
+    for (const file of archiveFiles) {
+      const archiveFile = vscode.Uri.joinPath(this.archiveDir, file);
       const data = await fs.readFile(archiveFile.fsPath, 'utf-8');
       const parsed: StorageData = JSON.parse(data);
       const incompleteTasks = parsed.tasks
@@ -198,29 +252,14 @@ export class VSCodeStorageAdapter implements StorageAdapter {
           createdAt: new Date(task.createdAt),
           doneAt: task.doneAt ? new Date(task.doneAt) : null,
         }));
-      return incompleteTasks;
-    } catch (error) {
-      console.error('Failed to get yesterday incomplete tasks:', error);
-      return [];
-    }
-  }
 
-  async updateArchivedTasks(logicalDate: string, task: Task): Promise<void> {
-    try {
-      const archiveFile = vscode.Uri.joinPath(this.archiveDir, `${logicalDate}.json`);
-
-      const data = await fs.readFile(archiveFile.fsPath, 'utf-8');
-      const parsed: StorageData = JSON.parse(data);
-
-      const index = parsed.tasks.findIndex((t) => t.id === task.id);
-      if (index !== -1) {
-        parsed.tasks[index] = task;
-        await fs.writeFile(archiveFile.fsPath, JSON.stringify(parsed, null, 2), 'utf-8');
+      if (incompleteTasks.length > 0) {
+        return incompleteTasks;
       }
-    } catch (error) {
-      console.error('Failed to update archived tasks:', error);
     }
+    return [];
   }
+
   // All tasks
   async getAllTasks(): Promise<Task[]> {
     const todayTasks = await this.loadData();

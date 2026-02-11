@@ -29,8 +29,8 @@ export interface StorageAdapter {
 
   // Archived Task related methods
   getArchivedTasks(logicalDate?: string): Promise<Task[]>;
-  getYesterdayIncompleteTasks(): Promise<Task[]>;
-  updateArchivedTasks(logicalDate: string, task: Task): Promise<void>;
+  updateArchivedTasks(task: Task, logicalDate?: string): Promise<void>;
+  getLatestIncompleteTasks(): Promise<Task[]>;
 
   // All tasks
   getAllTasks(): Promise<Task[]>;

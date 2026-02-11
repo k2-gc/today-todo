@@ -6,6 +6,6 @@ export type WebviewMessage =
   | { command: 'setFocusedTasks'; taskIds: string[] }
   | { command: 'toggleDone'; taskId: string }
   | { command: 'switchView'; view: ViewType }
-  | { command: 'getYesterdayIncompleteTasks' }
-  | { command: 'carryOverTask'; yesterdayTask: Task }
+  | { command: 'getLatestIncompleteTasks' }
+  | { command: 'carryOverTask'; latestIncompleteTask: Task }
   | { command: 'update' };

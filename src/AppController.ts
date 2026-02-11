@@ -108,17 +108,17 @@ export class AppController {
   }
 
   /**
-   * Obtain yesterday's incomplete tasks.
+   * Obtain latest incomplete tasks.
    */
-  async getYesterdayIncompleteTasks(): Promise<Task[]> {
-    return await this.storage.getYesterdayIncompleteTasks();
+  async getLatestIncompleteTasks(): Promise<Task[]> {
+    return await this.storage.getLatestIncompleteTasks();
   }
 
   /**
-   * Carry over yesterday's incomplete task to today.
+   * Carry over latest incomplete task to today.
    */
-  async carryOverTask(yesterdayTask: Task): Promise<Task> {
-    return await carryOverTask(yesterdayTask, this.storage);
+  async carryOverTask(latestIncompleteTask: Task): Promise<Task> {
+    return await carryOverTask(latestIncompleteTask, this.storage);
   }
 
   /**

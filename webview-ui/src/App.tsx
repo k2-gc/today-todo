@@ -14,7 +14,7 @@ export default function App() {
   const [session, setSession] = useState<TodaySession | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [allTasks, setAllTasks] = useState<Task[]>([]);
-  const [yesterdayTasks, setYesterdayTasks] = useState<Task[]>([]);
+  const [latestIncompleteTasks, setLatestIncompleteTasks] = useState<Task[]>([]);
   const [doneTodayTasks, setDoneTodayTasks] = useState<Task[]>([]);
   const [doneAllTasks, setDoneAllTasks] = useState<Task[]>([]);
 
@@ -68,14 +68,14 @@ export default function App() {
           }
           break;
 
-        case 'yesterdayIncompleteTasks':
-          setYesterdayTasks(message.payload.tasks);
+        case 'latestIncompleteTasks':
+          setLatestIncompleteTasks(message.payload.tasks);
           break;
 
         case 'carryOverTask':
           setTasks((prev) => [...prev, message.payload.task]);
           setSession(message.payload.session);
-          setYesterdayTasks((prev) =>
+          setLatestIncompleteTasks((prev) =>
             prev.filter((task) => task.id !== message.payload.originalTaskId),
           );
           break;
@@ -117,12 +117,12 @@ export default function App() {
     sendMessage({ command: 'switchView', view });
   };
 
-  const handleGetYesterdayIncompleteTasks = () => {
-    sendMessage({ command: 'getYesterdayIncompleteTasks' });
+  const handleGetLatestIncompleteTasks = () => {
+    sendMessage({ command: 'getLatestIncompleteTasks' });
   };
 
   const handleCarryOverTask = (task: Task) => {
-    sendMessage({ command: 'carryOverTask', yesterdayTask: task });
+    sendMessage({ command: 'carryOverTask', latestIncompleteTask: task });
   };
 
   // Get Task of Today List
@@ -143,9 +143,9 @@ export default function App() {
           tasks={todayTasks}
           onAddTask={handleAddTask}
           onSetFocusedTasks={handleSetFocusedTasks}
-          onGetYesterdayIncompleteTasks={handleGetYesterdayIncompleteTasks}
+          onGetLatestIncompleteTasks={handleGetLatestIncompleteTasks}
           onCarryOverTask={handleCarryOverTask}
-          yesterdayTasks={yesterdayTasks}
+          latestIncompleteTasks={latestIncompleteTasks}
         />
       )}
       {view === 'focus' && <FocusView tasks={focusedTasks} onToggleDone={handleToggleDone} />}
