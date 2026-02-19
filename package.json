@@ -2,7 +2,7 @@
   "name": "today-todo",
   "displayName": "Today-ToDo",
   "description": "Focus on today, Make progress.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "k2-gc",
   "icon": "media/icon.png",
   "engines": {

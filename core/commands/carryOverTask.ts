@@ -30,9 +30,11 @@ export async function carryOverTask(
   session.todayListTaskIds.push(newTask.id);
   await storage.saveTodaySessions(session);
 
-  // Mark the original latest incomplete task as done
+  // Mark the original latest incomplete task as done (but not as "completed")
+  // This is a carry-over, not a real completion, so we don't set doneSessionId
   latestIncompleteTask.isDone = true;
   latestIncompleteTask.doneAt = new Date();
+  latestIncompleteTask.doneSessionId = null;
   await storage.updateArchivedTasks(latestIncompleteTask);
 
   return newTask;

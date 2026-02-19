@@ -98,7 +98,9 @@ export class AppController {
    */
   async getAllDoneTasks(): Promise<Task[]> {
     const allTasks = await this.storage.getArchivedTasks();
-    const allDoneTasks = allTasks.filter((task) => task.isDone);
+    const allDoneTasks = allTasks.filter(
+      (task) => task.isDone && task.doneSessionId !== null && task.doneSessionId !== undefined,
+    );
     return allDoneTasks.sort((a, b) => {
       if (a.doneAt && b.doneAt) {
         return b.doneAt.getTime() - a.doneAt.getTime();
