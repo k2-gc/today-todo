@@ -19,3 +19,7 @@ Update README
 
 ### Refactor
 - Improved terminology consistency across codebase
+
+## [0.0.4] - 2026-02-19
+### Fix
+- Prevented carry-over tasks from appearing in all done list
